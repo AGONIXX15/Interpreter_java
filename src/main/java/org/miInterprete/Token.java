@@ -6,18 +6,14 @@ import java.util.regex.Pattern;
 public class Token {
     String type;
     Pattern[] patterns;
-    private String value;
     Token(String type, String[] patterns){
         // map the String[] patterns to an array of Pattern
-        this.patterns = Arrays.stream(patterns).map(x -> Pattern.compile(Pattern.quote(x))).toArray(Pattern[]::new);
+        this.patterns = Arrays.stream(patterns).map(Pattern::compile).toArray(Pattern[]::new);
         this.type = type;
     }
 
-    void setValue(String value){
-        this.value = value;
+    public String toString(){
+        return "Token(type="+ type +", patterns="+ Arrays.toString(patterns) +")";
     }
 
-    String getValue(){
-        return this.value;
-    }
 }
